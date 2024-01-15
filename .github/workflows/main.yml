@@ -24,4 +24,5 @@ jobs:
 
       - name: Deploy DAGs
         run: |
+          airflow db init
           airflow dags trigger my_dag
