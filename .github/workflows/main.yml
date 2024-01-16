@@ -24,8 +24,7 @@ jobs:
 
       - name: Deploy DAGs
         run: |
-           mkdir -p ~/airflow-docker/dags/
-           rsync -a --include="*/" --include="*.py" --exclude="*" airflow/dags/ ~/airflow-docker/dags/
+           rsync -a --include="*/" --include="*.py" --exclude="*" / ~/airflow-docker/dags/
            airflow db init
            airflow webserver -p 8080 -D
            airflow scheduler -D
