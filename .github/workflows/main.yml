@@ -21,14 +21,21 @@ jobs:
         run: |
           pip install apache-airflow
 
-      - name: Create DAGs directory
-        run: |
-          mkdir -p ~/airflow-docker/dags/
+#      - name: Create DAGs directory
+#        run: |
+#          mkdir -p ~/airflow-docker/dags/
 
+#      - name: Copy DAGs
+#        run: |
+#          rsync -a --include="*.py" --exclude="*" . ~/airflow-docker/dags/
+#          cd ~/airflow-docker
+#          airflow db init
+#          airflow webserver -p 8080 -D
+#          airflow scheduler -D
       - name: Copy DAGs
         run: |
-          rsync -a --include="*.py" --exclude="*" . ~/airflow-docker/dags/
-          cd ~/airflow-docker
+          rsync -a --include="*.py" --exclude="*" . ~/airflow/dags/
+          cd ~/airflow
           airflow db init
           airflow webserver -p 8080 -D
           airflow scheduler -D
