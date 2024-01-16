@@ -1,9 +1,8 @@
-name: Deploy Airflow DAGs
-
-on:
-  push:
-    branches:
-      - main
+- name: Deploy Airflow DAGs
+  on:
+    push:
+      branches:
+        - main
 
 jobs:
   deploy:
@@ -22,12 +21,13 @@ jobs:
         run: |
           pip install apache-airflow
 
-      - name: Implementar DAGs
+      - name: Create DAGs directory
+        run: mkdir -p ~/airflow-docker/dags/
+
+      - name: Copy DAGs
         run: |
           rsync -a --include="*.py" --exclude="*" . ~/airflow-docker/dags/
           cd ~/airflow-docker
           airflow db init
           airflow webserver -p 8080 -D
           airflow scheduler -D
-
-
