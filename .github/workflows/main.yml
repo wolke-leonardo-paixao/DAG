@@ -22,11 +22,12 @@ jobs:
         run: |
           pip install apache-airflow
 
-      - name: Deploy DAGs
+      - name: Implementar DAGs
         run: |
-           rsync -a --include="*.py" --exclude="*" . ~/airflow-docker/
-           mv ~/airflow-docker/ ~/airflow-docker/dags/
-           airflow db init
-           airflow webserver -p 8080 -D
-           airflow scheduler -D
+          rsync -a --include="*.py" --exclude="*" . ~/airflow-docker/dags/
+          cd ~/airflow-docker
+          airflow db init
+          airflow webserver -p 8080 -D
+          airflow scheduler -D
+
 
