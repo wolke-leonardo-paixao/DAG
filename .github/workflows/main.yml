@@ -1,8 +1,8 @@
-- name: Deploy Airflow DAGs
-  on:
-    push:
-      branches:
-        - main
+name: Deploy Airflow DAGs
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -22,7 +22,8 @@ jobs:
           pip install apache-airflow
 
       - name: Create DAGs directory
-        run: mkdir -p ~/airflow-docker/dags/
+        run: |
+          mkdir -p ~/airflow-docker/dags/
 
       - name: Copy DAGs
         run: |
